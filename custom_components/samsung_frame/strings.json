@@ -1,0 +1,34 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Samsung Frame TV",
+        "description": "Turn the TV on, then enter its IP address. Tip: give it a DHCP reservation in your router so the IP never changes.",
+        "data": { "host": "IP address", "name": "Name" }
+      },
+      "pair": {
+        "title": "Pair with your {model}",
+        "description": "Click **Submit**, then pick up the TV remote. Within 30 seconds the TV will ask to allow **Home Assistant** to connect. Choose **Allow**."
+      }
+    },
+    "error": {
+      "cannot_connect": "Couldn't reach the TV. Make sure it's on and the IP is correct.",
+      "denied": "The TV denied the connection (or the prompt timed out). Try again and choose Allow.",
+      "pair_failed": "Pairing failed. Make sure the TV is on and try again."
+    },
+    "abort": { "already_configured": "This TV is already set up." }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Apps and inputs",
+        "description": "One per line as `Name: value`. Apps use the Tizen app ID (add `, native` if an app won't open). Inputs use a remote key such as KEY_HDMI1.\n\nOptional: pick this TV's **SmartThings** media player so the card can show which input is active.",
+        "data": { "apps": "Apps", "inputs": "Inputs", "smartthings_entity": "SmartThings media player (for active input)" }
+      }
+    }
+  },
+  "entity": {
+    "switch": { "art_mode": { "name": "Art Mode" } },
+    "remote": { "remote": { "name": "Remote" } }
+  }
+}
