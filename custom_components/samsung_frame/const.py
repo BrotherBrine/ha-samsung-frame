@@ -20,7 +20,7 @@ TUNER_SOURCE_ALIASES = {"tv", "dtv", "digitaltv", "antenna", "cable", "livetv"}
 SCAN_INTERVAL_SECONDS = 10
 
 CARD_URL = "/samsung_frame/frame-tv-card.js"
-CARD_VERSION = "1.0.0"
+CARD_VERSION = "1.0.1"
 
 # Input name -> remote key
 DEFAULT_INPUTS = "TV: KEY_TV\nHDMI 1: KEY_HDMI1\nHDMI 2: KEY_HDMI2\nHDMI 3: KEY_HDMI3"

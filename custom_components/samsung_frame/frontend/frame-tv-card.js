@@ -363,13 +363,28 @@ const STYLES = `
   ha-card.off .chips, ha-card.off .apps, ha-card.off .nav, ha-card.off .media, ha-card.off .vol { opacity: .45; }
 `;
 
-if (!customElements.get("frame-tv-card")) {
-  customElements.define("frame-tv-card", FrameTvCard);
+// This script is loaded very early (as an extra frontend module), and the
+// frontend can replace window.customElements with a scoped-registry polyfill
+// after that. Wait until the dashboard's own elements exist, then define on
+// whatever registry is current, so Lovelace can find the card.
+function registerFrameTvCard() {
+  const registry = window.customElements;
+  if (!registry.get("frame-tv-card")) registry.define("frame-tv-card", FrameTvCard);
   window.customCards = window.customCards || [];
-  window.customCards.push({
-  type: "frame-tv-card",
-  name: "Frame TV Card",
-  description: "Power, Art Mode, inputs, apps, navigation and volume for a Samsung Frame TV.",
-    preview: true,
-  });
+  if (!window.customCards.some((c) => c.type === "frame-tv-card")) {
+    window.customCards.push({
+      type: "frame-tv-card",
+      name: "Frame TV Card",
+      description: "Power, Art Mode, inputs, apps, navigation and volume for a Samsung Frame TV.",
+      preview: true,
+    });
+  }
 }
+
+(function waitForLovelace(tries = 0) {
+  if (window.customElements.get("hui-card") || window.customElements.get("hui-view") || tries > 300) {
+    registerFrameTvCard();
+  } else {
+    setTimeout(() => waitForLovelace(tries + 1), 100);
+  }
+})();
